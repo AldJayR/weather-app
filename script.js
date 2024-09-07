@@ -22,7 +22,13 @@ const fetchData = async () => {
     try {
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}`);
         const data = await res.json();
-        displayWeatherData(data);
+
+        if (data.cod != 404) {
+            displayWeatherData(data);
+        } else {
+            weatherDataContainer.innerHTML = `Location not found`;
+            throw new Error("Invalid input.");
+        }
     } catch (err) {
         console.log(err);
         weatherDataContainer.innerHTML = `Location not found`;
@@ -51,5 +57,5 @@ const displayWeatherData = data => {
     `
 
     cityInput.value = '';
-};
+}
 
