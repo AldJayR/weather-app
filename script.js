@@ -23,7 +23,7 @@ const fetchData = async () => {
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}`);
         const data = await res.json();
 
-        if (data.cod != 404) {
+        if (data.cod !== 404) {
             displayWeatherData(data);
         } else {
             weatherDataContainer.innerHTML = `Location not found`;
